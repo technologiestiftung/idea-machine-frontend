@@ -1,15 +1,15 @@
 import { supabase } from "../supabase/supabase";
-import { Row } from "../types";
+import { Idea } from "../types";
 
-let rows: Row[] = [];
+let ideas: Idea[] = [];
 
 export const dbStore = {
 	subscribe(renderCallback: () => void) {
 		const abortController = new AbortController();
 
-		getRows(abortController)
+		getIdeas(abortController)
 			.then((data) => {
-				rows = [...data];
+				ideas = [...data];
 				renderCallback();
 			})
 			.catch(console.error);
@@ -24,7 +24,7 @@ export const dbStore = {
 					schema: "public",
 					table: "general_overview",
 				},
-				(data: { new: Row }) => updateRows(data, renderCallback),
+				(data: { new: Idea }) => updateIdeas(data, renderCallback),
 			)
 			.subscribe();
 
@@ -35,11 +35,11 @@ export const dbStore = {
 	},
 
 	getSnapshot() {
-		return rows;
+		return ideas;
 	},
 };
 
-async function getRows(abortController: AbortController): Promise<Row[]> {
+async function getIdeas(abortController: AbortController): Promise<Idea[]> {
 	const { data, error } = await supabase
 		.from("ideas")
 		.select()
@@ -63,9 +63,9 @@ async function getRows(abortController: AbortController): Promise<Row[]> {
 	return data;
 }
 
-function updateRows(data: { new: Row }, renderCallback: () => void) {
-	const newRow = data.new;
+function updateIdeas(data: { new: Idea }, renderCallback: () => void) {
+	const newIdea = data.new;
 
-	rows = [...rows, newRow];
+	ideas = [...ideas, newIdea];
 	renderCallback();
 }
