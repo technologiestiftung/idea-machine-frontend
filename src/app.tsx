@@ -7,17 +7,17 @@ import { dbStore } from "./store/store";
 const nodeTypes = { postcard: Postcard };
 
 export default function App() {
-	const rows = useSyncExternalStore(dbStore.subscribe, dbStore.getSnapshot);
+	const ideas = useSyncExternalStore(dbStore.subscribe, dbStore.getSnapshot);
 
 	const nodes = useMemo(
 		() =>
-			rows.map((row, index) => ({
+			ideas.map((row, index) => ({
 				id: row.id,
 				position: { x: (index % 6) * 500, y: Math.floor(index / 6) * 700 },
 				data: row,
 				type: "postcard",
 			})),
-		[rows],
+		[ideas],
 	);
 
 	return (

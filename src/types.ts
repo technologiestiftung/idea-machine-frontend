@@ -1,4 +1,4 @@
-export type Row = {
+export type Idea = {
 	created_at: string;
 	focus_group: string;
 	id: string;
