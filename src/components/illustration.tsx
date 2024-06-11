@@ -6,7 +6,13 @@ export function Illustration({ file }: { file: string | null }) {
 		const publicUrl = await getPublicUrl({ file });
 		return {
 			default: () => {
-				return <img src={publicUrl || ""} alt={""} />;
+				return (
+					<img
+						className="w-4/6 h-auto rounded-md"
+						src={publicUrl || ""}
+						alt={""}
+					/>
+				);
 			},
 		};
 	});
