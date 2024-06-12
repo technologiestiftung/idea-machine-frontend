@@ -1,15 +1,16 @@
 import { supabase } from "../supabase/supabase";
 import { Idea } from "../types";
+import { Node } from "reactflow";
 
-let ideas: Idea[] = [];
+let nodes: Node[] = [];
 
 export const dbStore = {
 	subscribe(renderCallback: () => void) {
 		const abortController = new AbortController();
 
 		getIdeas(abortController)
-			.then((data) => {
-				ideas = [...data];
+			.then((idea) => {
+				nodes = idea.map((idea) => toNode(idea));
 				renderCallback();
 			})
 			.catch(console.error);
@@ -22,9 +23,9 @@ export const dbStore = {
 				{
 					event: "*",
 					schema: "public",
-					table: "general_overview",
+					table: "ideas",
 				},
-				(data: { new: Idea }) => updateIdeas(data, renderCallback),
+				(data: { new: Idea }) => updateNodes(data, renderCallback),
 			)
 			.subscribe();
 
@@ -35,7 +36,7 @@ export const dbStore = {
 	},
 
 	getSnapshot() {
-		return ideas;
+		return nodes;
 	},
 };
 
@@ -63,9 +64,29 @@ async function getIdeas(abortController: AbortController): Promise<Idea[]> {
 	return data;
 }
 
-function updateIdeas(data: { new: Idea }, renderCallback: () => void) {
+function updateNodes(data: { new: Idea }, renderCallback: () => void) {
 	const newIdea = data.new;
 
-	ideas = [...ideas, newIdea];
+	nodes = [...nodes, toNode(newIdea)];
+
 	renderCallback();
+}
+
+function toNode(idea: Idea): Node {
+	return {
+		id: idea.id,
+		position: getRandomCircularCoordinates(),
+		data: idea,
+		type: "postcard",
+	} as any as Node;
+}
+
+function getRandomCircularCoordinates() {
+	// https://stackoverflow.com/questions/5837572/generate-a-random-point-within-a-circle-uniformly
+	const t = 2 * Math.PI * Math.random();
+	const r = Math.sqrt(Math.random());
+	const x = 0.5 + r * Math.cos(t) * 0.75;
+	const y = 0.5 + r * Math.sin(t) * 0.75;
+
+	return { x: x * 1500, y: y * 1000 };
 }
