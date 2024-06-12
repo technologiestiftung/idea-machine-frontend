@@ -45,8 +45,7 @@ export function Backside({ data }: { data: Idea }) {
 			</div>
 			<div className="w-1/2 flex flex-col justify-between pl-3 pb-16">
 				<div className="self-end">
-					<div className="bg-primaryBlue w-14 h-14"></div>
-					<div className="text-xs text-center">Ideenlink</div>
+					<div className="outline-dashed outline-primaryBlue w-14 h-16 rounded-md"></div>
 				</div>
 				<div className="flex flex-col gap-8">
 					<div className="border-b border-primaryBlue"></div>
