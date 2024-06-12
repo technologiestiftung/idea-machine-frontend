@@ -3,25 +3,26 @@ import { CubeIcon } from "./icons/cube-icon";
 
 const MAX_CHARACTERS = 300;
 
-const checkIdeaLength = (idea: string) => {
-	if (idea.length > MAX_CHARACTERS) {
-		const first300Chars = idea.substring(0, MAX_CHARACTERS);
-		const lastDotIndex = first300Chars.lastIndexOf(".");
-		/*
-		 * check if lastDotIndex is was found (if not equal to -1) then truncate the string to the last dot
-		 * otherwise cut the string at 300 characters
-		 */
-		const truncatedIdea =
-			lastDotIndex !== -1
-				? first300Chars.substring(0, lastDotIndex + 1)
-				: first300Chars;
-		idea = truncatedIdea;
+const truncateIdea = (idea: string) => {
+	if (idea.length <= MAX_CHARACTERS) {
+		return idea;
 	}
-	return idea;
+
+	const truncatedIdea = idea.substring(0, MAX_CHARACTERS);
+
+	/**
+	 * truncate to the last dot, if possible
+	 */
+	if (truncatedIdea.includes(".")) {
+		const lastDotIndex = truncatedIdea.lastIndexOf(".");
+		return truncatedIdea.substring(0, lastDotIndex + 1);
+	}
+
+	return truncatedIdea;
 };
 
 export function Backside({ data }: { data: Idea }) {
-	const checkedIdea = checkIdeaLength(data.idea);
+	const checkedIdea = truncateIdea(data.idea);
 
 	return (
 		<div className="w-[423px] h-[300px] bg-white flex justify-center p-4 relative rounded-md">
