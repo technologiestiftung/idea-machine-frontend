@@ -29,6 +29,7 @@ export default function App() {
 				data: row,
 				draggable: true,
 				type: "postcard",
+				selectable: true,
 			})),
 		[ideas],
 	);
@@ -46,7 +47,7 @@ export default function App() {
 	};
 
 	useEffect(() => {
-		setNodes(ideaNodes.concat(titleNode));
+		setNodes(ideaNodes.concat(titleNode as any));
 	}, [ideaNodes]);
 
 	return (
@@ -58,7 +59,7 @@ export default function App() {
 				minZoom={0}
 				maxZoom={3}
 			>
-				<Controls />
+				<Controls showInteractive={false} />
 			</ReactFlow>
 		</div>
 	);
