@@ -1,10 +1,11 @@
-import { useMemo, useSyncExternalStore } from "react";
-import ReactFlow, { Controls } from "reactflow";
+import { useEffect, useMemo, useSyncExternalStore } from "react";
+import ReactFlow, { Controls, useNodesState } from "reactflow";
 import "reactflow/dist/style.css";
 import { Postcard } from "./components/postcard";
+import { Title } from "./components/title";
 import { dbStore } from "./store/store";
 
-const nodeTypes = { postcard: Postcard };
+const nodeTypes = { postcard: Postcard, title: Title };
 
 const getRandomCircularCoordinates = () => {
 	// https://stackoverflow.com/questions/5837572/generate-a-random-point-within-a-circle-uniformly
@@ -18,31 +19,45 @@ const getRandomCircularCoordinates = () => {
 
 export default function App() {
 	const ideas = useSyncExternalStore(dbStore.subscribe, dbStore.getSnapshot);
+	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
-	const nodes = useMemo(
+	const ideaNodes = useMemo(
 		() =>
 			ideas.map((row) => ({
 				id: row.id,
 				position: getRandomCircularCoordinates(),
 				data: row,
+				draggable: true,
 				type: "postcard",
 			})),
 		[ideas],
 	);
 
+	const titleNode = {
+		id: "title",
+		position: { x: 10, y: 10 },
+		zIndex: 100,
+		data: {
+			title: "Grüße aus der Zukunft!",
+		},
+		draggable: false,
+		positionAbsolute: { x: 10, y: 10 },
+		type: "title",
+	};
+
+	useEffect(() => {
+		setNodes(ideaNodes.concat(titleNode));
+	}, [ideaNodes]);
+
 	return (
 		<div className="h-screen w-screen bg-background">
-			<div className="relative w-0 h-0">
-				<div className="absolut">
-					<div className="bg-white px-2 py-1 rounded-md shadow-lg absolute top-[11px] left-[11px] text-3xl font-bold text-primaryBlue text-center z-100">
-						Würfelideen!
-					</div>
-					<div className=" px-2 py-1 rounded-md shadow-lg absolute top-[10px] left-[11.5px] text-3xl font-bold text-primaryPink text-center z-100">
-						Würfelideen!
-					</div>
-				</div>
-			</div>
-			<ReactFlow nodes={nodes} nodeTypes={nodeTypes} minZoom={0} maxZoom={3}>
+			<ReactFlow
+				nodes={nodes}
+				nodeTypes={nodeTypes}
+				onNodesChange={onNodesChange}
+				minZoom={0}
+				maxZoom={3}
+			>
 				<Controls />
 			</ReactFlow>
 		</div>
