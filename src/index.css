@@ -12,3 +12,33 @@ h4 {
 	font-weight: 400;
 	margin: 1rem 0rem;
 }
+
+.react-flow__controls {
+	border-radius: 7px;
+	border-color: #2f2fa2;
+	border-width: 2px;
+	background-color: white;
+}
+
+.react-flow__controls-button {
+	background-color: transparent;
+	width: 30px;
+	height: 30px;
+	fill: #2f2fa2;
+	border-bottom: none;
+
+	&:hover {
+		background-color: transparent;
+		fill: #7474b2;
+	}
+
+	svg {
+		max-width: 18px;
+		max-height: 18px;
+	}
+}
+
+.react-flow__controls-zoomout {
+	border-bottom: 2px solid #2f2fa2;
+	border-top: 2px solid #2f2fa2;
+}
