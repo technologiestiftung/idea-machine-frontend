@@ -56,11 +56,11 @@ export const InfoDialog: React.FC = () => {
 						/>
 					</a>
 				</div>
-				<div className="flex justify-start gap-x-6 gap-y-3 flex-wrap text-primaryBlue hover:text-hoverBlue">
+				<div className="flex justify-start gap-x-6 gap-y-3 flex-wrap text-primaryBlue">
 					<a
 						target="_blank"
 						rel="noreferrer"
-						className="underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-focus"
+						className=" hover:text-hoverBlue underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-focus"
 						href="https://citylab-berlin.org/de/data-privacy/"
 					>
 						Datenschutz
@@ -68,7 +68,7 @@ export const InfoDialog: React.FC = () => {
 					<a
 						target="_blank"
 						rel="noreferrer"
-						className="underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-focus"
+						className=" hover:text-hoverBlue underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-focus"
 						href="https://citylab-berlin.org/de/imprint/"
 					>
 						Impressum
