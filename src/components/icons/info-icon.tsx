@@ -2,12 +2,7 @@ import React from "react";
 
 export const InfoIcon: React.FC = () => {
 	return (
-		<button
-			onClick={() => {
-				console.log("info clicked");
-			}}
-			className="react-flow__panel absolute top-[120px]"
-		>
+		<div className="hover:text-hoverBlue">
 			<svg
 				width="30"
 				height="30"
@@ -30,6 +25,6 @@ export const InfoIcon: React.FC = () => {
 					/>
 				</g>
 			</svg>
-		</button>
+		</div>
 	);
 };

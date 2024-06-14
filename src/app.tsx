@@ -4,7 +4,8 @@ import "reactflow/dist/style.css";
 import { Postcard } from "./components/postcard";
 import { Title } from "./components/title";
 import { dbStore } from "./store/store";
-import { InfoIcon } from "./components/icons/info-icon";
+import { InfoButton } from "./components/info-dialog/infoButton";
+import { InfoDialog } from "./components/info-dialog/infoDialog";
 
 const nodeTypes = { postcard: Postcard, title: Title };
 
@@ -42,7 +43,8 @@ export default function App() {
 	return (
 		<div className="h-screen w-screen bg-background">
 			<Title />
-			<InfoIcon />
+			<InfoButton />
+			<InfoDialog />
 			<ReactFlow
 				nodes={nodes}
 				nodeTypes={nodeTypes}

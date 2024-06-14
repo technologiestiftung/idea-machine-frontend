@@ -21,6 +21,7 @@ export function Postcard({ data }: { data: Idea }) {
 	});
 
 	const onPostcardClick = () => {
+		console.log("selectedNodes", selectedNodes);
 		console.log("clicked", nodeId, selectedNodes[0]);
 		setIsBackVisible(!isBackVisible);
 
