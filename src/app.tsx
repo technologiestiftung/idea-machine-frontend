@@ -34,24 +34,13 @@ export default function App() {
 		[ideas],
 	);
 
-	const titleNode = {
-		id: "title",
-		position: { x: 10, y: 10 },
-		zIndex: 100,
-		data: {
-			title: "Grüße aus der Zukunft!",
-		},
-		draggable: false,
-		positionAbsolute: { x: 10, y: 10 },
-		type: "title",
-	};
-
 	useEffect(() => {
-		setNodes(ideaNodes.concat(titleNode as any));
+		setNodes(ideaNodes);
 	}, [ideaNodes]);
 
 	return (
 		<div className="h-screen w-screen bg-background">
+			<Title />
 			<ReactFlow
 				nodes={nodes}
 				nodeTypes={nodeTypes}

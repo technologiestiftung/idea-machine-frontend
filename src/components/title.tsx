@@ -1,14 +1,12 @@
-import { AppTitle } from "../types";
-
-export function Title({ data }: { data: AppTitle }) {
+export function Title() {
 	return (
-		<div className="w-[250px] h-[100px] relative">
-			<div className="absolut top-0 left-0">
-				<h1 className="bg-white px-2 py-1 rounded-md shadow-lg absolute text-5xl font-bold text-primaryBlue text-center top-0.5 right-0.5">
-					{data.title}
+		<div className="w-0 h-0 relative">
+			<div className="react-flow__panel">
+				<h1 className="absolute m-0 bg-white top-[18px] left-[15px] z-1000 w-[250px] h-[100px] px-2 py-1 rounded-md shadow-lg text-5xl font-bold text-primaryBlue text-center">
+					Grüße aus der Zukunft!
 				</h1>
-				<h1 className="px-2 py-1 rounded-md absolute text-5xl font-bold text-primaryPink text-center ">
-					{data.title}
+				<h1 className="absolute m-0 px-2 py-1 top-[15px] left-[18px] w-[250px] h-[100px] rounded-md text-5xl font-bold text-primaryPink text-center ">
+					Grüße aus der Zukunft!
 				</h1>
 			</div>
 		</div>
