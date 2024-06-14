@@ -4,6 +4,16 @@ import { Backside } from "./backside";
 import { useCallback, useState } from "react";
 import { useOnSelectionChange, useNodeId } from "reactflow";
 
+const angleVariations: { [key: string]: string } = {
+	IoT: "rotate-6",
+	Kunstinstallation: "rotate-[10deg]",
+	Theaterstück: "rotate-12",
+	Veranstaltung: "rotate-[15deg]",
+	Robotik: "-rotate-[6deg]",
+	Sensorik: "-rotate-[15deg]",
+	Spiel: "-rotate-12",
+};
+
 export function Postcard({ data }: { data: Idea }) {
 	const [isBackVisible, setIsBackVisible] = useState(false);
 	const [isCurrentPostcardSelected, setIsCurrentPostcardSelected] =
@@ -33,20 +43,24 @@ export function Postcard({ data }: { data: Idea }) {
 
 	return (
 		<div
-			onClick={onPostcardClick}
-			className={`w-[423px] h-[300px] border rounded flex flex-col gap-2 shadow-lg relative preserve-3d 
-			${isBackVisible ? "my-rotate-y-180 duration-1000" : "my-rotate-y-0 duration-1000"}
-			${isCurrentPostcardSelected ? "outline outline-4 outline-focus outline-offset-1 z-10" : "outline-none"}
-			`}
+			className={` ${angleVariations[data.medium]} hover:rotate-0 hover:transition-transform duration-500`}
 		>
-			<div className="absolute backface-hidden">
-				<Backside data={data} />
-				{nodeId}
-			</div>
+			<div
+				onClick={onPostcardClick}
+				className={`w-[423px] h-[300px] border rounded flex flex-col gap-2 shadow-lg relative preserve-3d 
+			${isBackVisible ? "my-rotate-y-180 duration-1000" : "my-rotate-y-0 duration-1000"}
+			${isCurrentPostcardSelected ? "outline outline-4 outline-focus outline-offset-1 z-10 rotate-0" : "outline-none"}
+			`}
+			>
+				<div className="absolute backface-hidden">
+					<Backside data={data} />
+					{nodeId}
+				</div>
 
-			<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
-				<Frontside url={data.illustration_url} />
-				{nodeId}
+				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
+					<Frontside url={data.illustration_url} />
+					{nodeId}
+				</div>
 			</div>
 		</div>
 	);
