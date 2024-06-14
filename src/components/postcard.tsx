@@ -54,12 +54,10 @@ export function Postcard({ data }: { data: Idea }) {
 			>
 				<div className="absolute backface-hidden">
 					<Backside data={data} />
-					{nodeId}
 				</div>
 
 				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
 					<Frontside url={data.illustration_url} />
-					{nodeId}
 				</div>
 			</div>
 		</div>
