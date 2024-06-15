@@ -2,7 +2,7 @@ import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
 import { useCallback, useState } from "react";
-import { useOnSelectionChange, useNodeId } from "reactflow";
+import { useOnSelectionChange, Node, NodeProps } from "reactflow";
 
 const angleVariations: { [key: string]: string } = {
 	IoT: "rotate-6",
@@ -14,16 +14,12 @@ const angleVariations: { [key: string]: string } = {
 	Spiel: "-rotate-12",
 };
 
-export function Postcard({ data }: { data: Idea }) {
+export function Postcard({ data, id }: NodeProps<Idea>) {
 	const [isBackVisible, setIsBackVisible] = useState(false);
-	const [isCurrentPostcardSelected, setIsCurrentPostcardSelected] =
-		useState(false);
-
 	const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
-	const nodeId = useNodeId();
 
-	const onChange = useCallback(({ nodes }: { nodes: any[] }) => {
-		setSelectedNodes(nodes.map((node: any) => node.id));
+	const onChange = useCallback(({ nodes }: { nodes: Node[] }) => {
+		setSelectedNodes(nodes.map((node) => node.id));
 	}, []);
 
 	useOnSelectionChange({
@@ -31,19 +27,14 @@ export function Postcard({ data }: { data: Idea }) {
 	});
 
 	const onPostcardClick = () => {
-		console.log("selectedNodes", selectedNodes);
-		console.log("clicked", nodeId, selectedNodes[0]);
 		setIsBackVisible(!isBackVisible);
-
-		onChange({ nodes: [{ id: nodeId }] });
-		setIsCurrentPostcardSelected(selectedNodes[0] === nodeId);
-
-		console.log(isCurrentPostcardSelected);
 	};
+
+	const isCurrentPostcardSelected = selectedNodes[0] === id;
 
 	return (
 		<div
-			className={` ${angleVariations[data.medium]} hover:rotate-0 hover:transition-transform duration-500`}
+			className={`${angleVariations[data.medium]} hover:rotate-0 hover:transition-transform duration-500 hover:pointer-events-auto`}
 		>
 			<div
 				onClick={onPostcardClick}
