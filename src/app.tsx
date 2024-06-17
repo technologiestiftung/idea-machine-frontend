@@ -4,8 +4,8 @@ import "reactflow/dist/style.css";
 import { Postcard } from "./components/postcard";
 import { Title } from "./components/title";
 import { dbStore } from "./store/store";
-import { InfoButton } from "./components/info-dialog/infoButton";
-import { InfoDialog } from "./components/info-dialog/infoDialog";
+import { InfoButton } from "./components/info-dialog/info-button";
+import { InfoDialog } from "./components/info-dialog/info-dialog";
 
 const nodeTypes = { postcard: Postcard, title: Title };
 
