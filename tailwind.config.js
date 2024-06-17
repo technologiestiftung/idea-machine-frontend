@@ -30,6 +30,8 @@ export default {
 				primaryPink: "#F64C72",
 				primaryBlue: "#2F2FA2",
 				primaryYellow: "#F4CD03",
+				focus: "rgba(59, 130, 246, 0.54)",
+				hoverBlue: "#7474b2",
 			},
 		},
 	},

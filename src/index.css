@@ -5,3 +5,40 @@
 body {
 	color: #2f2fa2;
 }
+
+h1,
+h4 {
+	font-family: "Jersey 20", sans-serif;
+	font-weight: 400;
+	margin: 1rem 0rem;
+}
+
+.react-flow__controls {
+	border-radius: 7px;
+	border-color: #2f2fa2;
+	border-width: 2px;
+	background-color: white;
+}
+
+.react-flow__controls-button {
+	background-color: transparent;
+	width: 18px;
+	height: 18px;
+	fill: #2f2fa2;
+	border-bottom: none;
+
+	&:hover {
+		background-color: transparent;
+		fill: #7474b2;
+	}
+
+	svg {
+		max-width: 15px;
+		max-height: 15px;
+	}
+}
+
+.react-flow__controls-zoomout {
+	border-bottom: 2px solid #2f2fa2;
+	border-top: 2px solid #2f2fa2;
+}

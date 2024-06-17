@@ -8,3 +8,7 @@ export type Idea = {
 	postcard_url: string | null;
 	topic: string;
 };
+
+export type AppTitle = {
+	title: string;
+};
