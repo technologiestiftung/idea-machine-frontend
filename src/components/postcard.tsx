@@ -3,6 +3,7 @@ import { Frontside } from "./frontside";
 import { Backside } from "./backside";
 import { useCallback, useState } from "react";
 import { useOnSelectionChange, Node, NodeProps } from "reactflow";
+import { LoadingCard } from "./loading-card.tsx";
 
 const angleVariations: { [key: string]: string } = {
 	IoT: "rotate-6",
@@ -44,7 +45,8 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 			`}
 			>
 				<div className="absolute backface-hidden">
-					<Backside data={data} />
+					{/* <Backside data={data} /> */}
+					<LoadingCard />
 				</div>
 
 				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">

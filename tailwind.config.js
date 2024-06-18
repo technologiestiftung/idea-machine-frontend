@@ -32,6 +32,7 @@ export default {
 				primaryYellow: "#F4CD03",
 				focus: "rgba(59, 130, 246, 0.54)",
 				hoverBlue: "#7474b2",
+				skeleton: "#EAEAF6",
 			},
 		},
 	},
