@@ -1,7 +1,7 @@
 import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useOnSelectionChange, Node, NodeProps } from "reactflow";
 import { LoadingCard } from "./loading-card.tsx";
 
@@ -33,6 +33,16 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 
 	const isCurrentPostcardSelected = selectedNodes[0] === id;
 
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setIsLoading(false);
+		}, 5000);
+
+		return () => clearTimeout(timeout);
+	}, []);
+
 	return (
 		<div
 			className={`${angleVariations[data.medium]} hover:rotate-0 hover:transition-transform duration-500 hover:pointer-events-auto`}
@@ -45,8 +55,7 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 			`}
 			>
 				<div className="absolute backface-hidden">
-					{/* <Backside data={data} /> */}
-					<LoadingCard />
+					{isLoading ? <LoadingCard /> : <Backside data={data} />}
 				</div>
 
 				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
