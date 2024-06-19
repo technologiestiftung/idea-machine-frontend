@@ -21,6 +21,17 @@ const PostcardFlip = plugin(function ({ addUtilities }) {
 	});
 });
 
+const animationDelay = plugin(function ({ addUtilities }) {
+	addUtilities({
+		".animation-delay-250": {
+			animationDelay: "0.25s",
+		},
+		".animation-delay-500": {
+			animationDelay: "0.5s",
+		},
+	});
+});
+
 export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
@@ -34,7 +45,23 @@ export default {
 				hoverBlue: "#7474b2",
 				skeleton: "#EAEAF6",
 			},
+			animation: {
+				rollDice: "jumpAndSpin 1.5s ease infinite",
+			},
+			keyframes: {
+				jumpAndSpin: {
+					"0%": {
+						transform: "translateY(0) rotate(0deg)",
+					},
+					"50%": {
+						transform: "translateY(-50px) rotate(360deg)",
+					},
+					"100%": {
+						transform: "translateY(0) rotate(360deg)",
+					},
+				},
+			},
 		},
 	},
-	plugins: [PostcardFlip],
+	plugins: [PostcardFlip, animationDelay],
 };
