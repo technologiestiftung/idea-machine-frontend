@@ -24,11 +24,13 @@ export const InfoDialog: React.FC = () => {
 					</h1>
 				</div>
 				<p className="text-primaryBlue">
-					Bitte beachten Sie, dass die generierten Antworten zwar aus
-					offiziellen Dokumenten erstellt wurden, aber keine verbindliche
-					Antwort darstellen. Aktuelle KI-Sprachmodelle können zuweilen
-					Informationen inkorrekt aufbereiten. Wir empfehlen, die verlinkten
-					Quellenangaben zu überprüfen.
+					Drei Würfel, unendlich viele Ideen für die Stadt der Zukunft! Unsere
+					Ideenwürfel sind ein interaktives Würfelspiel und laden dazu ein, sich
+					von innovativen, aber nicht ganz ernst gemeinten Lösungsansätzen für
+					ein lebenswerteres Berlin inspirieren zu lassen. {""} Schnapp' Dir
+					zwei Mitspieler:innen oder würfele alles selbst. Den Rest erledigt die
+					KI. Gezeigt werden alle bislang generierten Ideen als Postkarten aus
+					der Zukunft.
 				</p>
 				<div className="flex gap-x-5 justify-start my-3">
 					<a
@@ -72,6 +74,14 @@ export const InfoDialog: React.FC = () => {
 						href="https://citylab-berlin.org/de/imprint/"
 					>
 						Impressum
+					</a>
+					<a
+						target="_blank"
+						rel="noreferrer"
+						className=" hover:text-hoverBlue underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-focus"
+						href="https://github.com/technologiestiftung/idea-machine-frontend"
+					>
+						Quellcode
 					</a>
 				</div>
 			</div>

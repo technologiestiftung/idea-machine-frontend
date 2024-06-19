@@ -1,6 +1,13 @@
+import { PrintButton } from "./print-button";
 import { Illustration } from "./illustration";
 
-export function Frontside({ url }: { url: string | null }) {
+export function Frontside({
+	url,
+	isCurrentPostcardSelected,
+}: {
+	url: string | null;
+	isCurrentPostcardSelected: boolean;
+}) {
 	return (
 		<div className="w-[423px] h-[300px] bg-white flex justify-center p-4 relative rounded-md">
 			<h4 className="absolute -rotate-6 top-[16px] left-[11.5px] text-lg leading-5 font-bold text-primaryBlue w-[90px] text-center">
@@ -10,6 +17,7 @@ export function Frontside({ url }: { url: string | null }) {
 				Grüße aus der Zukunft!
 			</h4>
 			<Illustration file={url} />
+			{isCurrentPostcardSelected && <PrintButton />}
 		</div>
 	);
 }

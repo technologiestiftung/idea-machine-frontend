@@ -49,17 +49,27 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 		>
 			<div
 				onClick={onPostcardClick}
-				className={`w-[423px] h-[300px] border rounded flex flex-col gap-2 shadow-lg relative preserve-3d 
+				className={`w-[423px] h-[300px] rounded flex flex-col gap-2 shadow-lg relative preserve-3d 
 			${isBackVisible ? "my-rotate-y-180 duration-1000" : "my-rotate-y-0 duration-1000"}
 			${isCurrentPostcardSelected ? "outline outline-4 outline-focus outline-offset-1 z-10 rotate-0" : "outline-none"}
 			`}
 			>
 				<div className="absolute backface-hidden">
-					{isLoading ? <LoadingCard /> : <Backside data={data} />}
+					{isLoading ? (
+						<LoadingCard />
+					) : (
+						<Backside
+							data={data}
+							isCurrentPostcardSelected={isCurrentPostcardSelected}
+						/>
+					)}
 				</div>
 
 				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
-					<Frontside url={data.illustration_url} />
+					<Frontside
+						url={data.illustration_url}
+						isCurrentPostcardSelected={isCurrentPostcardSelected}
+					/>
 				</div>
 			</div>
 		</div>
