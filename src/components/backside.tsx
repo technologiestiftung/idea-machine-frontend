@@ -1,5 +1,6 @@
 import { Idea } from "../types";
 import { CubeIcon } from "./icons/cube-icon";
+import { PrintButton } from "./print-button";
 
 const MAX_CHARACTERS = 300;
 
@@ -21,7 +22,13 @@ const truncateIdea = (idea: string) => {
 	return truncatedIdea;
 };
 
-export function Backside({ data }: { data: Idea }) {
+export function Backside({
+	data,
+	isCurrentPostcardSelected,
+}: {
+	data: Idea;
+	isCurrentPostcardSelected: boolean;
+}) {
 	const checkedIdea = truncateIdea(data.idea);
 
 	return (
@@ -53,6 +60,7 @@ export function Backside({ data }: { data: Idea }) {
 					<div className="border-b border-primaryBlue"></div>
 				</div>
 			</div>
+			{isCurrentPostcardSelected && <PrintButton />}
 		</div>
 	);
 }
