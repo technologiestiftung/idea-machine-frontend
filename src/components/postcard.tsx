@@ -67,7 +67,7 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 
 				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
 					<Frontside
-						url={data.illustration_url}
+						data={data}
 						isCurrentPostcardSelected={isCurrentPostcardSelected}
 					/>
 				</div>

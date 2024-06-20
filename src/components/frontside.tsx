@@ -1,11 +1,12 @@
 import { PrintButton } from "./print-button";
 import { Illustration } from "./illustration";
+import { Idea } from "../types.ts";
 
 export function Frontside({
-	url,
+	data,
 	isCurrentPostcardSelected,
 }: {
-	url: string | null;
+	data: Idea;
 	isCurrentPostcardSelected: boolean;
 }) {
 	return (
@@ -16,8 +17,10 @@ export function Frontside({
 			<h4 className="absolute -rotate-6 top-[15px] left-[12px] text-lg leading-5 font-bold text-primaryPink w-[90px] text-center">
 				Grüße aus der Zukunft!
 			</h4>
-			<Illustration file={url} />
-			{isCurrentPostcardSelected && <PrintButton />}
+			<Illustration file={data.illustration_url} />
+			{isCurrentPostcardSelected && (
+				<PrintButton postcardUrl={data.postcard_url} />
+			)}
 		</div>
 	);
 }
