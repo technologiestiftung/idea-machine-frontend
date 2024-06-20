@@ -60,7 +60,9 @@ export function Backside({
 					<div className="border-b border-primaryBlue"></div>
 				</div>
 			</div>
-			{isCurrentPostcardSelected && <PrintButton />}
+			{isCurrentPostcardSelected && (
+				<PrintButton postcardUrl={data.postcard_url} />
+			)}
 		</div>
 	);
 }
