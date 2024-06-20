@@ -2,7 +2,7 @@ import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
 import { useCallback, useEffect, useState } from "react";
-import { useOnSelectionChange, Node, NodeProps } from "reactflow";
+import { useOnSelectionChange, Node, NodeProps, useReactFlow } from "reactflow";
 import { LoadingCard } from "./loading-card.tsx";
 
 const angleVariations: { [key: string]: string } = {
@@ -27,8 +27,18 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 		onChange,
 	});
 
+	const { setViewport, fitView, getNode } = useReactFlow();
+	const zoomToCard = useCallback(() => {
+		const n = getNode(id);
+		if (!n) {
+			return;
+		}
+		fitView({ nodes: [n], duration: 1200, maxZoom: 1 });
+	}, [setViewport, getNode]);
+
 	const onPostcardClick = () => {
 		setIsBackVisible(!isBackVisible);
+		zoomToCard();
 	};
 
 	const isCurrentPostcardSelected = selectedNodes[0] === id;
