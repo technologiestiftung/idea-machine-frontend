@@ -1,7 +1,7 @@
-import { lazy, Suspense } from "react";
+import { lazy, memo, Suspense } from "react";
 import { supabase } from "../supabase/supabase";
 
-export function Illustration({ file }: { file: string | null }) {
+export const Illustration = memo(({ file }: { file: string | null }) => {
 	const SupabaseImage = lazy(async () => {
 		const publicUrl = await getPublicUrl({ file });
 		return {
@@ -22,7 +22,7 @@ export function Illustration({ file }: { file: string | null }) {
 			<SupabaseImage />
 		</Suspense>
 	);
-}
+});
 
 async function getPublicUrl({ file }: { file: string | null }) {
 	if (!file) {
