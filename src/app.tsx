@@ -20,6 +20,8 @@ export default function App() {
 		setNodes(ideaNodes);
 	}, [ideaNodes]);
 
+	const isNotMobile = window.innerWidth > 500;
+
 	return (
 		<div className="h-screen w-screen bg-background">
 			<Title />
@@ -32,7 +34,7 @@ export default function App() {
 				minZoom={0}
 				maxZoom={3}
 			>
-				<Controls showInteractive={false} />
+				{isNotMobile && <Controls showInteractive={false} />}
 			</ReactFlow>
 		</div>
 	);
