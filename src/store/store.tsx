@@ -84,9 +84,9 @@ function toNode(idea: Idea): Node {
 function getRandomCircularCoordinates() {
 	// https://stackoverflow.com/questions/5837572/generate-a-random-point-within-a-circle-uniformly
 	const t = 2 * Math.PI * Math.random();
-	const r = Math.sqrt(Math.random());
-	const x = 0.5 + r * Math.cos(t) * 0.75;
-	const y = 0.5 + r * Math.sin(t) * 0.75;
-
-	return { x: x * 1500, y: y * 1000 };
+	// r between 0.2 - 1 to too many cards in center
+	const r = Math.max(0.2, Math.random());
+	const x = 0.5 + r * Math.cos(t) * 1000;
+	const y = 0.5 + r * Math.sin(t) * 850;
+	return { x, y };
 }
