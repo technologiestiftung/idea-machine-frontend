@@ -83,7 +83,7 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 
 	return (
 		<div
-			className={`${angleVariations[data.medium]} hover:rotate-0 hover:transition-transform duration-500 hover:pointer-events-auto`}
+			className={`${angleVariations[data.medium] || "rotate-[4deg]"} hover:rotate-0 hover:transition-transform duration-500 hover:pointer-events-auto`}
 		>
 			<div
 				onClick={onPostcardClick}
