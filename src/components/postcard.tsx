@@ -2,7 +2,13 @@ import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
 import { useCallback, useEffect, useState } from "react";
-import { useOnSelectionChange, Node, NodeProps, useReactFlow } from "reactflow";
+import {
+	useOnSelectionChange,
+	Node,
+	NodeProps,
+	useReactFlow,
+	useStoreApi,
+} from "reactflow";
 import { LoadingCard } from "./loading-card.tsx";
 
 const angleVariations: { [key: string]: string } = {
@@ -27,14 +33,14 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 		onChange,
 	});
 
-	const { setViewport, fitView, getNode } = useReactFlow();
+	const { fitView, getNode } = useReactFlow();
 	const zoomToCard = useCallback(() => {
 		const n = getNode(id);
 		if (!n) {
 			return;
 		}
 		fitView({ nodes: [n], duration: 1200, maxZoom: 1 });
-	}, [setViewport, getNode]);
+	}, [getNode]);
 
 	const onPostcardClick = () => {
 		setIsBackVisible(!isBackVisible);
@@ -45,10 +51,22 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 
 	const [isLoading, setIsLoading] = useState(true);
 
+	const store = useStoreApi();
+	const { addSelectedNodes } = store.getState();
+
+	const updateActiveNode = () => {
+		addSelectedNodes([id]);
+		if (selectedNodes[0] === id) {
+			zoomToCard();
+		}
+	};
+
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setIsLoading(false);
 		}, 5000);
+
+		updateActiveNode();
 
 		return () => clearTimeout(timeout);
 	}, []);
