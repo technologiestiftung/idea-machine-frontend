@@ -55,21 +55,11 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 			`}
 			>
 				<div className="absolute backface-hidden">
-					{isLoading ? (
-						<LoadingCard />
-					) : (
-						<Backside
-							data={data}
-							isCurrentPostcardSelected={isCurrentPostcardSelected}
-						/>
-					)}
+					{isLoading ? <LoadingCard /> : <Backside data={data} />}
 				</div>
 
 				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
-					<Frontside
-						data={data}
-						isCurrentPostcardSelected={isCurrentPostcardSelected}
-					/>
+					<Frontside data={data} />
 				</div>
 			</div>
 		</div>
