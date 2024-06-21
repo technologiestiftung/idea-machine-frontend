@@ -10,7 +10,7 @@ export const InfoButton: React.FC = () => {
 						document.getElementById("infoDialog") as HTMLDialogElement
 					).showModal();
 				}}
-				className="react-flow__panel left-[270px] top-[0px]"
+				className="react-flow__panel left-[280px] top-[0px]"
 			>
 				<InfoIcon />
 			</button>
