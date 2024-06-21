@@ -10,6 +10,7 @@ import {
 	useStoreApi,
 } from "reactflow";
 import { LoadingCard } from "./loading-card.tsx";
+import { useNodesInitialized } from "reactflow";
 
 const angleVariations: { [key: string]: string } = {
 	IoT: "rotate-6",
@@ -34,6 +35,7 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 	});
 
 	const { fitView, getNode } = useReactFlow();
+
 	const zoomToCard = useCallback(() => {
 		const n = getNode(id);
 		if (!n) {
@@ -70,6 +72,14 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 
 		return () => clearTimeout(timeout);
 	}, []);
+
+	const nodesInitialized = useNodesInitialized();
+	useEffect(() => {
+		if (nodesInitialized) {
+			// Fit view after nodes are initialized and on when new nodes are added
+			fitView({ padding: 0.1 });
+		}
+	}, [nodesInitialized]);
 
 	return (
 		<div
