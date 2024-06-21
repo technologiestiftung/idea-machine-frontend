@@ -22,13 +22,7 @@ const truncateIdea = (idea: string) => {
 	return truncatedIdea;
 };
 
-export function Backside({
-	data,
-	isCurrentPostcardSelected,
-}: {
-	data: Idea;
-	isCurrentPostcardSelected: boolean;
-}) {
+export function Backside({ data }: { data: Idea }) {
 	const checkedIdea = truncateIdea(data.idea);
 
 	return (
@@ -60,9 +54,8 @@ export function Backside({
 					<div className="border-b border-primaryBlue"></div>
 				</div>
 			</div>
-			{isCurrentPostcardSelected && (
-				<PrintButton postcardUrl={data.postcard_url} />
-			)}
+
+			<PrintButton postcardUrl={data.postcard_url} />
 		</div>
 	);
 }
