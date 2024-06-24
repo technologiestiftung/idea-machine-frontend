@@ -32,7 +32,8 @@ export default function App() {
 				nodeTypes={nodeTypes}
 				onNodesChange={onNodesChange}
 				minZoom={0}
-				maxZoom={3}
+				maxZoom={2}
+				selectionOnDrag={true}
 			>
 				{isNotMobile && <Controls showInteractive={false} />}
 			</ReactFlow>

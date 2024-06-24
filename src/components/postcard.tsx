@@ -1,9 +1,13 @@
 import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
-import { useCallback, useEffect, useState } from "react";
-import { useOnSelectionChange, Node, NodeProps } from "reactflow";
+import { useState } from "react";
+import { NodeProps } from "reactflow";
 import { LoadingCard } from "./loading-card.tsx";
+import { useIsLoading } from "./hooks/use-is-loading.tsx";
+import { useSelectedNodes } from "./hooks/use-selected-nodes.tsx";
+import { useResetView } from "./hooks/use-reset-view.tsx";
+import { useZoomToCard } from "./hooks/use-zoom-to-card.tsx";
 
 const angleVariations: { [key: string]: string } = {
 	IoT: "rotate-6",
@@ -17,35 +21,19 @@ const angleVariations: { [key: string]: string } = {
 
 export function Postcard({ data, id }: NodeProps<Idea>) {
 	const [isBackVisible, setIsBackVisible] = useState(false);
-	const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
-
-	const onChange = useCallback(({ nodes }: { nodes: Node[] }) => {
-		setSelectedNodes(nodes.map((node) => node.id));
-	}, []);
-
-	useOnSelectionChange({
-		onChange,
-	});
+	const isLoading = useIsLoading();
+	const isCurrentPostcardSelected = useSelectedNodes(id);
+	const zoomToCard = useZoomToCard(id);
+	useResetView();
 
 	const onPostcardClick = () => {
 		setIsBackVisible(!isBackVisible);
+		zoomToCard();
 	};
-
-	const isCurrentPostcardSelected = selectedNodes[0] === id;
-
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setIsLoading(false);
-		}, 5000);
-
-		return () => clearTimeout(timeout);
-	}, []);
 
 	return (
 		<div
-			className={`${angleVariations[data.medium]} hover:rotate-0 hover:transition-transform duration-500 hover:pointer-events-auto`}
+			className={`${angleVariations[data.medium] || "rotate-[4deg]"} hover:rotate-0 hover:transition-transform duration-500 hover:pointer-events-auto`}
 		>
 			<div
 				onClick={onPostcardClick}
