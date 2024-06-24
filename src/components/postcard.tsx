@@ -1,16 +1,13 @@
 import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
-import { useCallback, useEffect, useState } from "react";
-import {
-	useOnSelectionChange,
-	Node,
-	NodeProps,
-	useReactFlow,
-	useStoreApi,
-} from "reactflow";
+import { useState } from "react";
+import { NodeProps } from "reactflow";
 import { LoadingCard } from "./loading-card.tsx";
-import { useNodesInitialized } from "reactflow";
+import { useIsLoading } from "./hooks/use-is-loading.tsx";
+import { useSelectedNodes } from "./hooks/use-selected-nodes.tsx";
+import { useResetView } from "./hooks/use-reset-view.tsx";
+import { useZoomToCard } from "./hooks/use-zoom-to-card.tsx";
 
 const angleVariations: { [key: string]: string } = {
 	IoT: "rotate-6",
@@ -24,62 +21,15 @@ const angleVariations: { [key: string]: string } = {
 
 export function Postcard({ data, id }: NodeProps<Idea>) {
 	const [isBackVisible, setIsBackVisible] = useState(false);
-	const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
-
-	const onChange = useCallback(({ nodes }: { nodes: Node[] }) => {
-		setSelectedNodes(nodes.map((node) => node.id));
-	}, []);
-
-	useOnSelectionChange({
-		onChange,
-	});
-
-	const { fitView, getNode } = useReactFlow();
-
-	const zoomToCard = useCallback(() => {
-		const n = getNode(id);
-		if (!n) {
-			return;
-		}
-		fitView({ nodes: [n], duration: 1200, maxZoom: 1 });
-	}, [getNode]);
+	const isLoading = useIsLoading(id);
+	const isCurrentPostcardSelected = useSelectedNodes(id);
+	const zoomToCard = useZoomToCard(id);
+	useResetView();
 
 	const onPostcardClick = () => {
 		setIsBackVisible(!isBackVisible);
 		zoomToCard();
 	};
-
-	const isCurrentPostcardSelected = selectedNodes[0] === id;
-
-	const [isLoading, setIsLoading] = useState(true);
-
-	const store = useStoreApi();
-	const { addSelectedNodes } = store.getState();
-
-	const updateActiveNode = () => {
-		addSelectedNodes([id]);
-		if (selectedNodes[0] === id) {
-			zoomToCard();
-		}
-	};
-
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setIsLoading(false);
-		}, 5000);
-
-		updateActiveNode();
-
-		return () => clearTimeout(timeout);
-	}, []);
-
-	const nodesInitialized = useNodesInitialized();
-	useEffect(() => {
-		if (nodesInitialized) {
-			// Fit view after nodes are initialized and on when new nodes are added
-			fitView({ padding: 0.1 });
-		}
-	}, [nodesInitialized]);
 
 	return (
 		<div
