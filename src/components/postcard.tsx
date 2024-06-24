@@ -21,7 +21,7 @@ const angleVariations: { [key: string]: string } = {
 
 export function Postcard({ data, id }: NodeProps<Idea>) {
 	const [isBackVisible, setIsBackVisible] = useState(false);
-	const isLoading = useIsLoading(id);
+	const isLoading = useIsLoading();
 	const isCurrentPostcardSelected = useSelectedNodes(id);
 	const zoomToCard = useZoomToCard(id);
 	useResetView();
