@@ -21,7 +21,7 @@ export const dbStore = {
 				// @ts-ignore
 				"postgres_changes",
 				{
-					event: "*",
+					event: "insert",
 					schema: "public",
 					table: "ideas",
 				},
@@ -70,6 +70,11 @@ function updateNodes(data: { new: Idea }, renderCallback: () => void) {
 	nodes = [...nodes, toNode(newIdea)];
 
 	renderCallback();
+	setTimeout(
+		() =>
+			document.dispatchEvent(new CustomEvent("new-idea", { detail: newIdea })),
+		500,
+	);
 }
 
 function toNode(idea: Idea): Node {
