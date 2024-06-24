@@ -6,40 +6,32 @@
 
 # (Semi-serious) Idea Machine
 
-
-```bash
-npx all-contributors-cli check
-npx all-contributors-cli add ff6347 doc
-```
-
-You can use it on GitHub just by commenting on PRs and issues:
-
-```plain
-@all-contributors please add @ff6347 for infrastructure, tests and code
-```
-
-- [ ] Add your project description
-- [ ] Get fancy shields at https://shields.io
+Web app that displays greetings from the future (Postcards with ideas/illustration by ChatGPT/Dall-e) for the digitalization of Berlin. 
+The ideas are explicitly semi-serious and are intended as a conversation starter. 
+The ideas are generated from physical dice rolls that send their result side to the backend.
+Each side is associated with a term such as "Web-App", "Gesundheit", etc. that serves as input to the idea generation.
 
 ## Prerequisites
 
-tbd...
+These are the other necessary repositories:
+- [https://github.com/technologiestiftung/idea-machine-backend](https://github.com/technologiestiftung/idea-machine-backend)
+- [https://github.com/technologiestiftung/idea-machine-dice](https://github.com/technologiestiftung/idea-machine-dice)
+
 
 ## Installation
 
-tbd...
-
-## Usage or Deployment
-
-tbd...
+If you are not in the project folder, cd into it and install dependencies:
+```bash
+cd idea-machine-frontend && npm ci
+```
 
 ## Development
 
-tbd...
+You can run the dev server with the following command:
+```bash
+npm run dev
+```
 
-## Tests
-
-tbd...
 
 ## Contributing
 
@@ -72,8 +64,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
 
-Illustrations by {MARIA_MUSTERFRAU}, all rights reserved.
-
 ## Credits
 
 <table>
@@ -82,24 +72,28 @@ Illustrations by {MARIA_MUSTERFRAU}, all rights reserved.
       Made by <a href="https://citylab-berlin.org/de/start/">
         <br />
         <br />
-        <img width="200" src="https://logos.citylab-berlin.org/logo-citylab-berlin.svg" />
+        <img width="200" src="https://logos.citylab-berlin.org/logo-citylab-berlin.svg"  alt=""/>
       </a>
     </td>
     <td>
       A project by <a href="https://www.technologiestiftung-berlin.de/">
         <br />
         <br />
-        <img width="150" src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg" />
+        <img width="150" src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg"  alt=""/>
       </a>
     </td>
     <td>
       Supported by <a href="https://www.berlin.de/rbmskzl/">
         <br />
         <br />
-        <img width="80" src="https://logos.citylab-berlin.org/logo-berlin-senatskanzelei-de.svg" />
+        <img width="80" src="https://logos.citylab-berlin.org/logo-berlin-senatskanzelei-de.svg"  alt=""/>
       </a>
     </td>
   </tr>
 </table>
 
 ## Related Projects
+
+https://github.com/technologiestiftung/idea-machine-backend
+
+https://github.com/technologiestiftung/idea-machine-dice
