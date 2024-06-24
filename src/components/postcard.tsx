@@ -8,6 +8,7 @@ import { useIsLoading } from "./hooks/use-is-loading.tsx";
 import { useSelectedNodes } from "./hooks/use-selected-nodes.tsx";
 import { useResetView } from "./hooks/use-reset-view.tsx";
 import { useZoomToCard } from "./hooks/use-zoom-to-card.tsx";
+import { useListenToNewIdeas } from "./hooks/use-listen-to-new-ideas.tsx";
 
 const angleVariations: { [key: string]: string } = {
 	IoT: "rotate-6",
@@ -25,6 +26,7 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 	const isCurrentPostcardSelected = useSelectedNodes(id);
 	const zoomToCard = useZoomToCard(id);
 	useResetView();
+	useListenToNewIdeas({ postcardId: data.id, zoomToCard, nodeId: id });
 
 	const onPostcardClick = () => {
 		setIsBackVisible(!isBackVisible);
