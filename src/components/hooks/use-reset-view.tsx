@@ -10,5 +10,4 @@ export function useResetView() {
 			fitView({ padding: 0.1 });
 		}
 	}, [nodesInitialized]);
-	return;
 }
