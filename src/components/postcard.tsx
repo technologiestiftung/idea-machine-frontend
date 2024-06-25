@@ -20,8 +20,12 @@ const angleVariations: { [key: string]: string } = {
 	Spiel: "-rotate-12",
 };
 
+function getRandomBoolean() {
+	return Math.random() < 0.5;
+}
+
 export function Postcard({ data, id }: NodeProps<Idea>) {
-	const [isBackVisible, setIsBackVisible] = useState(false);
+	const [isBackVisible, setIsBackVisible] = useState(getRandomBoolean());
 	const isLoading = useIsLoading();
 	const isCurrentPostcardSelected = useSelectedNodes(id);
 	const zoomToCard = useZoomToCard(id);
