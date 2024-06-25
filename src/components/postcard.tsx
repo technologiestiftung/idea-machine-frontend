@@ -3,7 +3,8 @@ import { Frontside } from "./frontside";
 import { Backside } from "./backside";
 import { useState } from "react";
 import { NodeProps } from "reactflow";
-import { LoadingCard } from "./loading-card.tsx";
+import { LoadingCardBack } from "./loading-card-back.tsx";
+import { LoadingCardFront } from "./loading-card-front.tsx";
 import { useIsLoading } from "./hooks/use-is-loading.tsx";
 import { useSelectedNodes } from "./hooks/use-selected-nodes.tsx";
 import { useResetView } from "./hooks/use-reset-view.tsx";
@@ -49,11 +50,11 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 			`}
 			>
 				<div className="absolute backface-hidden">
-					{isLoading ? <LoadingCard /> : <Backside data={data} />}
+					{isLoading ? <LoadingCardBack /> : <Backside data={data} />}
 				</div>
 
 				<div className="absolute my-rotate-y-180 backface-hidden overflow-hidden">
-					<Frontside data={data} />
+					{isLoading ? <LoadingCardFront /> : <Frontside data={data} />}
 				</div>
 			</div>
 		</div>
