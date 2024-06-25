@@ -1,6 +1,6 @@
 import { CubeIcon } from "./icons/cube-icon";
 
-export function LoadingCard() {
+export function LoadingCardBack() {
 	return (
 		<div className="w-[423px] h-[300px] bg-white flex justify-center p-4 relative rounded-md">
 			<div className="w-1/2 border-r border-skeleton pr-3 justify-center flex flex-col gap-2">
