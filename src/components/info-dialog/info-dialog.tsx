@@ -57,6 +57,18 @@ export const InfoDialog: React.FC = () => {
 							className="w-[92px]"
 						/>
 					</a>
+					<a
+						target="_blank"
+						rel="noreferrer"
+						href="https://www.berlin.de/rbmskzl/"
+						className="focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-focus"
+					>
+						<img
+							src="https://logos.citylab-berlin.org/logo-senatskanzlei-buergermeister-horizontal.svg"
+							alt="Berlin"
+							className="w-[150px]"
+						/>
+					</a>
 				</div>
 				<div className="flex justify-start gap-x-6 gap-y-3 flex-wrap text-primaryBlue">
 					<a
