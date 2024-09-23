@@ -14,10 +14,13 @@ export default function App() {
 		dbStore.subscribe,
 		dbStore.getSnapshot,
 	);
+
+	const truncatedIdeaNodes = ideaNodes.slice(0, 10);
+
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
 	useEffect(() => {
-		setNodes(ideaNodes);
+		setNodes(truncatedIdeaNodes);
 	}, [ideaNodes]);
 
 	const isNotMobile = window.innerWidth > 500;
