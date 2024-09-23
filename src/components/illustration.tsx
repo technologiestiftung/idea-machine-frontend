@@ -29,7 +29,9 @@ async function getPublicUrl({ file }: { file: string | null }) {
 		return null;
 	}
 
-	const { data } = supabase.storage.from("illustrations").getPublicUrl(file);
+	const { data } = supabase.storage
+		.from("illustrations")
+		.getPublicUrl(file, { transform: { width: 500, height: 500 } });
 
 	return data.publicUrl;
 }
