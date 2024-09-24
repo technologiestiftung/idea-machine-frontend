@@ -16,37 +16,29 @@ import { useResetView } from "./components/hooks/use-reset-view";
 
 const nodeTypes = { postcard: Postcard, title: Title };
 
-// function getZoomLevel(zoom: number) {
-// 	if (zoom < 1) {
-// 		return 1;
-// 	}
-
-// 	return zoom;
-// }
-
 export default function App() {
+	const isNotMobile = window.innerWidth > 500;
+
 	const ideaNodes = useSyncExternalStore(
 		dbStore.subscribe,
 		dbStore.getSnapshot,
 	);
 
-	const truncatedIdeaNodes = ideaNodes.slice(0, 30);
+	const truncatedIdeaNodes = ideaNodes.slice(ideaNodes.length - 30, -1);
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
 	useEffect(() => {
+		if (isNotMobile) {
+			setNodes(ideaNodes);
+			return;
+		}
+
 		setNodes(truncatedIdeaNodes);
 	}, [ideaNodes]);
 
-	const isNotMobile = window.innerWidth > 500;
-
 	const { fitView } = useReactFlow();
 
-	// do we really need this?
-	// const { zoom } = useViewport();
-	// const newZoomLevel = getZoomLevel(zoom);
-
-	// https://reactflow.dev/learn/tutorials/slide-shows-with-react-flow#focus-on-click
 	const handleNodeClick = useCallback<NodeMouseHandler>(
 		(_, node) => {
 			fitView({ nodes: [node], duration: 1200, maxZoom: 1 });
