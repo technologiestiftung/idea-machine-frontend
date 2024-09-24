@@ -30,7 +30,7 @@ export default function App() {
 		dbStore.getSnapshot,
 	);
 
-	const truncatedIdeaNodes = ideaNodes.slice(0, 40);
+	const truncatedIdeaNodes = ideaNodes.slice(0, 30);
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
