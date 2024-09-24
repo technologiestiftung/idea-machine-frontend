@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
@@ -6,9 +7,6 @@ import { NodeProps } from "reactflow";
 import { LoadingCardBack } from "./loading-card-back.tsx";
 import { LoadingCardFront } from "./loading-card-front.tsx";
 import { useIsLoading } from "./hooks/use-is-loading.tsx";
-import { useSelectedNodes } from "./hooks/use-selected-nodes.tsx";
-import { useResetView } from "./hooks/use-reset-view.tsx";
-import { useZoomToCard } from "./hooks/use-zoom-to-card.tsx";
 import { useListenToNewIdeas } from "./hooks/use-listen-to-new-ideas.tsx";
 
 const angleVariations: { [key: string]: string } = {
@@ -25,17 +23,16 @@ function getRandomBoolean() {
 	return Math.random() < 0.5;
 }
 
-export function Postcard({ data, id }: NodeProps<Idea>) {
+export function Postcard(props: NodeProps<Idea>) {
+	const { data, id } = props;
+
 	const [isBackVisible, setIsBackVisible] = useState(getRandomBoolean());
 	const isLoading = useIsLoading();
-	const isCurrentPostcardSelected = useSelectedNodes(id);
-	const zoomToCard = useZoomToCard(id);
-	useResetView();
-	useListenToNewIdeas({ postcardId: data.id, zoomToCard, nodeId: id });
+
+	useListenToNewIdeas({ postcardId: data.id, nodeId: id });
 
 	const onPostcardClick = () => {
 		setIsBackVisible(!isBackVisible);
-		zoomToCard();
 	};
 
 	return (
@@ -44,9 +41,9 @@ export function Postcard({ data, id }: NodeProps<Idea>) {
 		>
 			<div
 				onClick={onPostcardClick}
-				className={`w-[423px] h-[300px] rounded flex flex-col gap-2 shadow-lg relative preserve-3d 
+				className={`w-[423px] h-[300px] rounded flex flex-col gap-2 shadow-lg relative preserve-3d
 			${isBackVisible ? "my-rotate-y-180 duration-1000" : "my-rotate-y-0 duration-1000"}
-			${isCurrentPostcardSelected ? "outline outline-4 outline-focus outline-offset-1 z-10 rotate-0" : "outline-none"}
+			${props.selected ? "outline outline-4 outline-focus outline-offset-1 z-10 rotate-0" : "outline-none"}
 			`}
 			>
 				<div className="absolute backface-hidden">

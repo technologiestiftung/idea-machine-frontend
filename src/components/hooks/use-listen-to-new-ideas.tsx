@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useStoreApi } from "reactflow";
+import { useZoomToCard } from "./use-zoom-to-card";
 
 export function useListenToNewIdeas({
 	postcardId,
 	nodeId,
-	zoomToCard,
 }: {
 	postcardId: string;
 	nodeId: string;
-	zoomToCard: () => void;
 }) {
 	const { addSelectedNodes } = useStoreApi().getState();
+	const zoomToCard = useZoomToCard(nodeId);
 
 	useEffect(() => {
 		const listener = (event: Event) => {
