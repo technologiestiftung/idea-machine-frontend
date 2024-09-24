@@ -1,26 +1,21 @@
-import { lazy, memo, Suspense } from "react";
+import { memo, useEffect, useState } from "react";
 import { supabase } from "../supabase/supabase";
 
 export const Illustration = memo(({ file }: { file: string | null }) => {
-	const SupabaseImage = lazy(async () => {
-		const publicUrl = await getPublicUrl({ file });
-		return {
-			default: () => {
-				return (
-					<img
-						className="w-4/6 h-auto rounded-md"
-						src={publicUrl || ""}
-						alt={""}
-					/>
-				);
-			},
-		};
-	});
+	const [publicUrl, setPublicUrl] = useState<string | null>(null);
+
+	useEffect(() => {
+		getPublicUrl({ file })
+			.then((pubUrl) => {
+				setPublicUrl(pubUrl);
+			})
+			.catch((error) => {
+				console.error("Error loading illustration", error);
+			});
+	}, [file]);
 
 	return (
-		<Suspense>
-			<SupabaseImage />
-		</Suspense>
+		<img className="w-4/6 h-auto rounded-md" src={publicUrl || ""} alt={""} />
 	);
 });
 
