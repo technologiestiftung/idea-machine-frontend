@@ -1,11 +1,9 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { useCallback, useEffect, useSyncExternalStore } from "react";
 import ReactFlow, {
 	Controls,
 	useNodesState,
 	useReactFlow,
 	useStoreApi,
-	useViewport,
 	type NodeMouseHandler,
 } from "reactflow";
 import "reactflow/dist/style.css";
@@ -33,7 +31,6 @@ export default function App() {
 	const { addSelectedNodes } = useStoreApi().getState();
 
 	const { fitView, getNode } = useReactFlow();
-	const { zoom } = useViewport();
 
 	useEffect(() => {
 		const listener = (event: Event) => {

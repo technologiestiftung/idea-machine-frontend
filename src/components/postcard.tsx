@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { Idea } from "../types.ts";
 import { Frontside } from "./frontside";
 import { Backside } from "./backside";
