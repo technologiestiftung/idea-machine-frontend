@@ -4,6 +4,8 @@ import ReactFlow, {
 	Controls,
 	useNodesState,
 	useReactFlow,
+	useStoreApi,
+	useViewport,
 	type NodeMouseHandler,
 } from "reactflow";
 import "reactflow/dist/style.css";
@@ -28,7 +30,25 @@ export default function App() {
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
+	const { addSelectedNodes } = useStoreApi().getState();
+
+	const { fitView, getNode } = useReactFlow();
+	const { zoom } = useViewport();
+
 	useEffect(() => {
+		const listener = (event: Event) => {
+			const newNodeID = (event as CustomEvent).detail.id;
+			const newNode = getNode(newNodeID);
+
+			if (newNode) {
+				fitView({ nodes: [newNode], duration: 1200, maxZoom: 1 });
+			}
+			addSelectedNodes([newNodeID]);
+		};
+
+		document.addEventListener("new-idea", listener);
+		document.removeEventListener("new-idea", listener);
+
 		if (isNotMobile) {
 			setNodes(ideaNodes);
 			return;
@@ -37,11 +57,9 @@ export default function App() {
 		setNodes(truncatedIdeaNodes);
 	}, [ideaNodes]);
 
-	const { fitView } = useReactFlow();
-
 	const handleNodeClick = useCallback<NodeMouseHandler>(
 		(_, node) => {
-			fitView({ nodes: [node], duration: 1200, maxZoom: 1 });
+			fitView({ nodes: [node], duration: 1200 });
 		},
 		[fitView],
 	);
@@ -58,7 +76,7 @@ export default function App() {
 				nodeTypes={nodeTypes}
 				onNodesChange={onNodesChange}
 				minZoom={0}
-				maxZoom={2}
+				maxZoom={1.5}
 				selectionOnDrag={true}
 				onNodeClick={handleNodeClick}
 			>

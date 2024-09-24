@@ -7,7 +7,6 @@ import { NodeProps } from "reactflow";
 import { LoadingCardBack } from "./loading-card-back.tsx";
 import { LoadingCardFront } from "./loading-card-front.tsx";
 import { useIsLoading } from "./hooks/use-is-loading.tsx";
-import { useListenToNewIdeas } from "./hooks/use-listen-to-new-ideas.tsx";
 
 const angleVariations: { [key: string]: string } = {
 	IoT: "rotate-6",
@@ -23,13 +22,9 @@ function getRandomBoolean() {
 	return Math.random() < 0.5;
 }
 
-export function Postcard(props: NodeProps<Idea>) {
-	const { data, id } = props;
-
+export function Postcard({ data, selected }: NodeProps<Idea>) {
 	const [isBackVisible, setIsBackVisible] = useState(getRandomBoolean());
 	const isLoading = useIsLoading();
-
-	useListenToNewIdeas({ postcardId: data.id, nodeId: id });
 
 	const onPostcardClick = () => {
 		setIsBackVisible(!isBackVisible);
@@ -43,7 +38,7 @@ export function Postcard(props: NodeProps<Idea>) {
 				onClick={onPostcardClick}
 				className={`w-[423px] h-[300px] rounded flex flex-col gap-2 shadow-lg relative preserve-3d
 			${isBackVisible ? "my-rotate-y-180 duration-1000" : "my-rotate-y-0 duration-1000"}
-			${props.selected ? "outline outline-4 outline-focus outline-offset-1 z-10 rotate-0" : "outline-none"}
+			${selected ? "outline outline-4 outline-focus outline-offset-1 z-10 rotate-0" : "outline-none"}
 			`}
 			>
 				<div className="absolute backface-hidden">
