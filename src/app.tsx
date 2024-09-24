@@ -30,12 +30,12 @@ export default function App() {
 		dbStore.getSnapshot,
 	);
 
-	const truncatedIdeaNodes = ideaNodes.slice(0, 10);
+	// const truncatedIdeaNodes = ideaNodes.slice(0, 10);
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
 	useEffect(() => {
-		setNodes(truncatedIdeaNodes);
+		setNodes(ideaNodes);
 	}, [ideaNodes]);
 
 	const isNotMobile = window.innerWidth > 500;
