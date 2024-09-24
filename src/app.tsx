@@ -44,7 +44,6 @@ export default function App() {
 		};
 
 		document.addEventListener("new-idea", listener);
-		document.removeEventListener("new-idea", listener);
 
 		if (isNotMobile) {
 			setNodes(ideaNodes);
@@ -52,6 +51,10 @@ export default function App() {
 		}
 
 		setNodes(truncatedIdeaNodes);
+
+		return () => {
+			document.removeEventListener("new-idea", listener);
+		};
 	}, [ideaNodes]);
 
 	const handleNodeClick = useCallback<NodeMouseHandler>(
