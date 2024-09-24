@@ -24,8 +24,6 @@ export default function App() {
 		dbStore.getSnapshot,
 	);
 
-	const truncatedIdeaNodes = ideaNodes.slice(ideaNodes.length - 30, -1);
-
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 
 	const { addSelectedNodes } = useStoreApi().getState();
@@ -45,16 +43,19 @@ export default function App() {
 
 		document.addEventListener("new-idea", listener);
 
+		return () => {
+			document.removeEventListener("new-idea", listener);
+		};
+	}, []);
+
+	useEffect(() => {
 		if (isNotMobile) {
 			setNodes(ideaNodes);
 			return;
 		}
 
+		const truncatedIdeaNodes = ideaNodes.slice(ideaNodes.length - 30, -1);
 		setNodes(truncatedIdeaNodes);
-
-		return () => {
-			document.removeEventListener("new-idea", listener);
-		};
 	}, [ideaNodes]);
 
 	const handleNodeClick = useCallback<NodeMouseHandler>(
