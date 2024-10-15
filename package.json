@@ -16,7 +16,7 @@
     "reactflow": "11.11.4"
   },
   "devDependencies": {
-    "@technologiestiftung/eslint-config": "0.2.0",
+    "@technologiestiftung/eslint-config": "0.3.1",
     "@technologiestiftung/eslint-plugin": "0.1.1",
     "@technologiestiftung/prettier-config": "1.0.0",
     "@types/react": "^18.2.66",
@@ -26,13 +26,13 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "10.4.20",
     "eslint": "^8.57.0",
-    "eslint-plugin-react": "7.36.1",
+    "eslint-plugin-react": "7.37.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "globals": "15.9.0",
+    "globals": "15.11.0",
     "postcss": "8.4.47",
     "prettier": "3.3.3",
-    "tailwindcss": "3.4.12",
+    "tailwindcss": "3.4.14",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }
